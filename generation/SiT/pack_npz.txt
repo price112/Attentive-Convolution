@@ -1,0 +1,19 @@
+#!/bin/bash
+#SBATCH --job-name=666
+#SBATCH --account=project_462001033
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --gpus-per-node=1
+#SBATCH --cpus-per-task=48
+#SBATCH --mem=480G
+#SBATCH --partition=dev-g
+#SBATCH --time=3:00:00
+
+module purge
+module load LUMI/24.03 partition/G rocm/6.0.3
+export OMP_NUM_THREADS=1
+
+export PATH="/users/conda/torch_old/bin:$PATH"
+
+srun python pack_npz.py --sample-dir ../ffhq_512
+

@@ -1,0 +1,20 @@
+#!/bin/bash
+#SBATCH --job-name=666
+#SBATCH --account=project_462001033
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --gpus-per-node=1
+#SBATCH --cpus-per-task=48
+#SBATCH --mem=480G
+#SBATCH --partition=dev-g
+#SBATCH --time=3:00:00
+
+module purge
+module load LUMI/24.03 partition/G rocm/6.0.3
+export OMP_NUM_THREADS=1
+
+export PATH="/users/yuhao111/conda/torch_old/bin:$PATH" 
+
+pip install pytorch-fid
+
+srun python -m pytorch_fid --save-stats ../ffhq_512 ffhq_512_fid.npz
