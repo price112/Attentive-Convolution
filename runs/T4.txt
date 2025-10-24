@@ -32,7 +32,7 @@ srun torchrun \
     --lr 0.004 \
     --epochs 300 \
     --model AttNet_T4 \
-    --input_size 384 \
+    --input_size 224 \
     --drop_path_rate 0.5 \
     --weight_decay 0.05 \
     --num_workers 8 \
